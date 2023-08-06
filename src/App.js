@@ -1,6 +1,6 @@
 import Expenses from "./components/Expenses/Expenses";
 
-function App() {
+const App = () => {           //changed to arrow function
   const expenses = [
     {
       id: "e1",
