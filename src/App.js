@@ -1,3 +1,4 @@
+import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 
 const App = () => {           //changed to arrow function
@@ -25,6 +26,7 @@ const App = () => {           //changed to arrow function
 
   return (
     <div>
+      <NewExpense />
       <Expenses items={expenses} />
     </div>
   );
