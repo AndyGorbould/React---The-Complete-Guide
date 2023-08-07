@@ -17,26 +17,38 @@ const ExpenseForm = () => {
         // console.log(event.target.value);
         // setEnteredTitle(event.target.value);
         // 👇 the spread is needed to not initialize the other values 👇
-        setUserInput({
-            ...userInput,
-            enteredTitle: event.target.value,
-        })
+        // setUserInput({
+        //     ...userInput,
+        //     enteredTitle: event.target.value,
+        // })
+        // 👆 this could return an old state snapshot because of scheduling 👆
+        //
+        // 👇 this will always be the latest state snapshot 👇
+        setUserInput((prevState) => {
+            return { ...prevState, enteredTitle: event.target.value };
+        });
     };
 
     const amountChangeHandler = (event) => {
         // setEnteredAmount(event.target.value);
-        setUserInput({
-            ...userInput,
-            enteredAmount: event.target.value,
-        })
+        // setUserInput({
+        //     ...userInput,
+        //     enteredAmount: event.target.value,
+        // })
+        setUserInput((prevState) => {
+            return { ...prevState, enteredAmount: event.target.value };
+        });
     };
 
     const dateChangeHandler = (event) => {
         // setEnteredDate(event.target.value);
-        setUserInput({
-            ...userInput,
-            enteredDate: event.target.value,
-        })
+        // setUserInput({
+        //     ...userInput,
+        //     enteredDate: event.target.value,
+        // })
+        setUserInput((prevState) => {
+            return { ...prevState, enteredDate: event.target.value };
+        });
     };
 
     return (
