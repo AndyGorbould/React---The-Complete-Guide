@@ -23,10 +23,17 @@ const App = () => {           //changed to arrow function
       date: new Date(2021, 5, 12),
     },
   ];
+  
+  const addExpenseHandler = (expense) => {
+    console.log('In App.js');
+    console.log(expense);
+    // 👆 this is to confirm the object is accessible in App.js
+  }
 
   return (
+
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
