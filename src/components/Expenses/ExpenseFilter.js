@@ -2,8 +2,8 @@ import './ExpenseFilter.css';
 
 const ExpenseFilter = () => {
 
-    const yearSelectHandler = () => {
-
+    const yearSelectHandler = (event) => {
+        console.log(event.target.value);
     };
 
     return (
