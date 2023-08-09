@@ -6,10 +6,9 @@ import "./Expenses.css";
 
 const Expenses = (props) => {         //changed to arrow function
 
-  const [selectedYear, setSelectedYear] = useState('2021');
+  const [selectedYear, setSelectedYear] = useState('2020');
   
   const yearFilterChangeHandler = (selectedYear) => {
-    console.log(`${selectedYear} - from Expenses.js`);
     setSelectedYear(selectedYear);
   };
 
@@ -17,6 +16,24 @@ const Expenses = (props) => {         //changed to arrow function
     <div>
       <Card className="expenses">
         <ExpenseFilter selected={selectedYear} onChangeFilter={yearFilterChangeHandler} />
+
+        {props.items.map((expense) => (     // 👈 an example of dynamic rendering
+          <ExpenseItem
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
+
+      </Card>
+    </div>
+  );
+}
+
+export default Expenses;
+
+// 👇 this was the 'hardcoded' way; the dynamic rendering way is better (mapping, see above)
+/*
         <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
@@ -37,9 +54,4 @@ const Expenses = (props) => {         //changed to arrow function
           amount={props.items[3].amount}
           date={props.items[3].date}
         />
-      </Card>
-    </div>
-  );
-}
-
-export default Expenses;
+*/
