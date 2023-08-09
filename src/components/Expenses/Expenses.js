@@ -19,6 +19,7 @@ const Expenses = (props) => {         //changed to arrow function
 
         {props.items.map((expense) => (     // 👈 an example of dynamic rendering
           <ExpenseItem
+            key={expense.id}
             title={expense.title}
             amount={expense.amount}
             date={expense.date}
