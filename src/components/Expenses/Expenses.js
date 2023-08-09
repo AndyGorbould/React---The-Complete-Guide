@@ -12,12 +12,16 @@ const Expenses = (props) => {         //changed to arrow function
     setSelectedYear(selectedYear);
   };
 
+  const filteredExpenses = props.items.filter(expense => {
+    return expense.date.getFullYear().toString() === selectedYear;
+  });
+
   return (
     <div>
       <Card className="expenses">
         <ExpenseFilter selected={selectedYear} onChangeFilter={yearFilterChangeHandler} />
 
-        {props.items.map((expense) => (     // 👈 an example of dynamic rendering
+        {filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
           <ExpenseItem
             key={expense.id}
             title={expense.title}
