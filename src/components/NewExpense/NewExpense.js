@@ -11,7 +11,7 @@ const NewExpense = (props) => {
             id: Math.random().toString()              // could be replaced with GUID or UUID to stop duplicate possibilities
         };
         console.log(expenseData);
-        props.onAddExpense(expenseData);            // 👈 forwarding expenseData to App.js (parent)
+        props.onAddExpense(expenseData);            // 👈 forwarding expenseData to App.js (parent) aka lifting state
     };
 
     return (
