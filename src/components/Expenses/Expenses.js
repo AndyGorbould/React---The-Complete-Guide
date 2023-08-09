@@ -21,14 +21,18 @@ const Expenses = (props) => {         //changed to arrow function
       <Card className="expenses">
         <ExpenseFilter selected={selectedYear} onChangeFilter={yearFilterChangeHandler} />
 
-        {filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {filteredExpenses.length === 0 ? (
+        <p>No expenses found.</p> 
+        ) : (
+          filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))
+        )}
 
       </Card>
     </div>
