@@ -21,9 +21,8 @@ const Expenses = (props) => {         //changed to arrow function
       <Card className="expenses">
         <ExpenseFilter selected={selectedYear} onChangeFilter={yearFilterChangeHandler} />
 
-        {filteredExpenses.length === 0 ? (
-        <p>No expenses found.</p> 
-        ) : (
+        {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+        {filteredExpenses.length > 0 &&
           filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
             <ExpenseItem
               key={expense.id}
@@ -31,8 +30,7 @@ const Expenses = (props) => {         //changed to arrow function
               amount={expense.amount}
               date={expense.date}
             />
-          ))
-        )}
+          ))}
 
       </Card>
     </div>
