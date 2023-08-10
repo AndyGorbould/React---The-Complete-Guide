@@ -16,22 +16,24 @@ const Expenses = (props) => {         //changed to arrow function
     return expense.date.getFullYear().toString() === selectedYear;
   });
 
+  let expensesContent = <p>No expenses found.</p>;      // returning expensesContent default (if none are found)
+
+  if (filteredExpenses.length > 0) {                    // returning expensesContent default (length > 0)
+    expensesContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
+  
   return (
     <div>
       <Card className="expenses">
         <ExpenseFilter selected={selectedYear} onChangeFilter={yearFilterChangeHandler} />
-
-        {filteredExpenses.length === 0 && <p>No expenses found.</p>}
-        {filteredExpenses.length > 0 &&
-          filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
-            <ExpenseItem
-              key={expense.id}
-              title={expense.title}
-              amount={expense.amount}
-              date={expense.date}
-            />
-          ))}
-
+        {expensesContent}
       </Card>
     </div>
   );
@@ -61,4 +63,18 @@ export default Expenses;
           amount={props.items[3].amount}
           date={props.items[3].date}
         />
+*/
+
+// 👇 replaced with expensesContent variable
+/*
+{filteredExpenses.length === 0 && <p>No expenses found.</p>}
+{filteredExpenses.length > 0 &&
+  filteredExpenses.map((expense) => (     // 👈 an example of dynamic rendering
+    <ExpenseItem
+      key={expense.id}
+      title={expense.title}
+      amount={expense.amount}
+      date={expense.date}
+    />
+  ))}
 */
