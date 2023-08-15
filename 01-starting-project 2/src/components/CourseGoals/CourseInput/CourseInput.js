@@ -12,6 +12,10 @@ const CourseInput = props => {
 
   const formSubmitHandler = event => {
     event.preventDefault();
+    // 👇 returns if nothing entered when 'Add Goal' button is pressed
+    if (enteredValue.trim().length === 0) {
+      return;
+    }
     props.onAddGoal(enteredValue);
   };
 
