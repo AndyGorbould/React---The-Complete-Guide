@@ -1,7 +1,15 @@
 const Form = (props) => {
+    const submitHandler = (event) => {
+        event.preventDefault(); // page does not get reloaded
+        console.log('submit handler')
+    };
+
+    const resetHandler = () => {
+        console.log('reset handler')
+    };
     
     return (
-    <form className="form">
+    <form onSubmit={submitHandler} className="form">
         <div className="input-group">
             <p>
             <label htmlFor="current-savings">Current Savings ($)</label>
@@ -25,7 +33,7 @@ const Form = (props) => {
             </p>
         </div>
         <p className="actions">
-            <button type="reset" className="buttonAlt">
+            <button onClick={resetHandler} type="reset" className="buttonAlt">
             Reset
             </button>
             <button type="submit" className="button">
