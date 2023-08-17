@@ -1,15 +1,31 @@
+import { useState } from "react";
+
+const initialUserInput = {
+    'current-savings': 10000,
+    'yearly-contribution': 1200,
+    'expected-return': 7,
+    'duration': 10
+}
+
 const Form = (props) => {
+    const [userInput, setUserInput] = useState(initialUserInput);
+
     const submitHandler = (event) => {
         event.preventDefault(); // page does not get reloaded
         console.log('submit handler')
     };
 
     const resetHandler = () => {
-        console.log('reset handler')
+        setUserInput(initialUserInput);
     };
     
     const inputChangetHandler = (input, value) => {
-        console.log('change handler')
+        setUserInput((prevInput) => {
+            return {
+                ...prevInput,
+                [input]: value,
+            };
+        });
     };
     
     return (
@@ -21,6 +37,7 @@ const Form = (props) => {
                 onChange={(event) =>
                     inputChangetHandler('current-savings', event.target.value)
                 }
+                value={userInput['current-savings']}
                 type="number"
                 id="current-savings"
             />
@@ -31,6 +48,7 @@ const Form = (props) => {
                 onChange={(event) =>
                     inputChangetHandler('yearly-contribution', event.target.value)
                 }
+                value={userInput['yearly-contribution']}
                 type="number"
                 id="yearly-contribution"
             />
@@ -45,6 +63,7 @@ const Form = (props) => {
                 onChange={(event) =>
                     inputChangetHandler('expected-return', event.target.value)
                 }
+                value={userInput['expected-return']}
                 type="number"
                 id="expected-return"
             />
@@ -55,6 +74,7 @@ const Form = (props) => {
                 onChange={(event) =>
                     inputChangetHandler('duration', event.target.value)
                 }
+                value={userInput['duration']}
                 type="number"
                 id="duration"
             />
