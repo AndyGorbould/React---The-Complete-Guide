@@ -1,3 +1,11 @@
+const formatter = new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat
+
 const Result = (props) => {
 
     return (
@@ -18,10 +26,10 @@ const Result = (props) => {
         {props.data.map((yearData) => (
             <tr key={yearData.year}>
                 <td>{yearData.year}</td>
-                <td>{yearData.savingsEndOfYear}</td>
-                <td>{yearData.yearlyInterest}</td>
-                <td>{yearData.savingsEndOfYear - props.initialInvestment - yearData.yearlyContribution * yearData.year}</td>
-                <td>{props.initialInvestment + yearData.yearlyContribution * yearData.year}</td>
+                <td>{formatter.format(yearData.savingsEndOfYear)}</td>
+                <td>{formatter.format(yearData.yearlyInterest)}</td>
+                <td>{formatter.format(yearData.savingsEndOfYear - props.initialInvestment - yearData.yearlyContribution * yearData.year)}</td>
+                <td>{formatter.format(props.initialInvestment + yearData.yearlyContribution * yearData.year)}</td>
             </tr>
         ))}
         
