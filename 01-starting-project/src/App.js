@@ -36,7 +36,8 @@ function App() {
     <div>
       <Header />
       <Form onCalculate={calculateHandler} />
-      <Result />
+      {!userInput && <p style={{textAlign: 'center'}}>No investment calculated yet</p>}
+      {userInput && <Result />}
     </div>
   );
 }
