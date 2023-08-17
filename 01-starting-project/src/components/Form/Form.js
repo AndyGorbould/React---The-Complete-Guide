@@ -13,6 +13,8 @@ const Form = (props) => {
     const submitHandler = (event) => {
         event.preventDefault(); // page does not get reloaded
         console.log('submit handler')
+
+        props.onCalculate(userInput);
     };
 
     const resetHandler = () => {
