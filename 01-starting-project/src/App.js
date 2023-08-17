@@ -1,7 +1,8 @@
+import Header from './components/Header/Header.js';
 import Form from './components/Form/Form.js';
 import Result from './components/Result/Result.js';
 
-import logo from './assets/investment-calculator-logo.png';
+
 
 function App() {
   const calculateHandler = (userInput) => {
@@ -33,12 +34,10 @@ function App() {
 
   return (
     <div>
-      <header className="header">
-        <img src={logo} alt="logo" />
-        <h1>Investment Calculator</h1>
-      </header>
+      
 
       
+      <Header />
       <Form />
       <Result />
     </div>
