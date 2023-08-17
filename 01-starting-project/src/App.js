@@ -37,10 +37,11 @@ function App() {
       <Header />
       <Form onCalculate={calculateHandler} />
       {!userInput && <p style={{textAlign: 'center'}}>No investment calculated yet</p>}
-      {userInput && <Result />}
+      {userInput && <Result data={yearlyData} initialInvestment={userInput['current-savings']} />}
     </div>
   );
 }
 /* 👆 in Form submitHandler, props.onCalculate(userInput) is used to lift state */
+/* 👆 yearlyData is passed down as 'data' to Result component */
 
 export default App;
