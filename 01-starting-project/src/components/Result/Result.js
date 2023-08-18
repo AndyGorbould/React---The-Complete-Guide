@@ -1,3 +1,5 @@
+import style from './Result.module.css';
+
 const formatter = new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'EUR',
@@ -12,7 +14,7 @@ const Result = (props) => {
     /* Todo: Show below table conditionally (only once result data is available) */
     /* Show fallback text if no data is available */
 
-    <table className="result">
+    <table className={style.result}>
     <thead>
         <tr>
         <th>Year</th>
