@@ -3,7 +3,7 @@ import classes from './Card.module.css';    // CSS Modules can have any name
 
 const Card = (props) => {
     return (
-        <div className={classes.card}>
+        <div className={`${classes.card} ${props.liftedStyling}`}>
         {/* <div className={iAmAStyle.card}> */}
             {props.children}
         </div>
