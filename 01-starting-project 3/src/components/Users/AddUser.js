@@ -21,6 +21,8 @@ const AddUser = (props) => {
     }
 
     console.log(enteredUsername, enteredAge);
+    // lifting state to App.js
+    props.onAdduser(enteredUsername, enteredAge);
     setEnteredUsername(""); // resets these inputs after triggered when combined with the value->useState on the inputs below
     setEnteredAge("");
   };
