@@ -10,16 +10,16 @@ const AddUser = (props) => {
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    
+
     // Validation
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
-        return;
+      return;
     }
-    // the + on +enteredAge defines the variable has a numeric value 
+    // the + on +enteredAge defines the variable has a numeric value
     if (+enteredAge < 1) {
-        return;
+      return;
     }
-    
+
     console.log(enteredUsername, enteredAge);
     setEnteredUsername(""); // resets these inputs after triggered when combined with the value->useState on the inputs below
     setEnteredAge("");
