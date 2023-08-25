@@ -41,10 +41,14 @@ const Login = (props) => {
     isValid: false,
   });
 
+  // alias assignment, object destructuring
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("Checking for validity");
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     // 👇 cleanup function runs before new side effect function
@@ -52,7 +56,7 @@ const Login = (props) => {
       console.log("cleanup");
       clearTimeout(identifier); // clears timer before setting a new one
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
   // useEffect runs when the dependencies are altered
 
   const emailChangeHandler = (event) => {
