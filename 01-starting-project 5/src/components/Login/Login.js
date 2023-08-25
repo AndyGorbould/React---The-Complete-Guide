@@ -41,33 +41,31 @@ const Login = (props) => {
     isValid: false,
   });
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log("Checking for validity");
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("Checking for validity");
+      setFormIsValid(emailState.isValid && passwordState.isValid);
+    }, 500);
 
-  //   // 👇 cleanup function runs before new side effect function
-  //   return () => {
-  //     console.log('cleanup');
-  //     clearTimeout(identifier);   // clears timer before setting a new one
-  //   };
-  // }, [enteredEmail, enteredPassword]);
-  // // useEffect runs when the dependencies are altered
+    // 👇 cleanup function runs before new side effect function
+    return () => {
+      console.log("cleanup");
+      clearTimeout(identifier); // clears timer before setting a new one
+    };
+  }, [emailState, passwordState]);
+  // useEffect runs when the dependencies are altered
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(
-      event.target.value.includes("@") && passwordState.isValid
-    );
+    // setFormIsValid(
+    //   event.target.value.includes("@") && passwordState.isValid
+    // );
   };
 
   const passwordChangeHandler = (event) => {
-    dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
-    setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
+    // setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
@@ -76,7 +74,7 @@ const Login = (props) => {
   };
 
   const validatePasswordHandler = () => {
-    dispatchEmail({ type: 'INPUT_BLUR' })
+    dispatchEmail({ type: "INPUT_BLUR" });
   };
 
   const submitHandler = (event) => {
