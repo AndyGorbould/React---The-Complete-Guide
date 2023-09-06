@@ -13,7 +13,10 @@ const Cart = (props) => {
 
   const cartItemRemoveHandler = (id) => {};
 
-  const cartItemAddHandler = (item) => {};
+  const cartItemAddHandler = (item) => {
+    // cartCtx.addItem(item)        // this doubles the items on each click
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
