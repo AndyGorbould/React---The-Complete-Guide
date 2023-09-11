@@ -4,11 +4,11 @@ import Users from "./Users";
 import classes from "./UserFinder.module.css";
 import UserCtx from "../store/users-context";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "Max" },
-  { id: "u2", name: "Manuel" },
-  { id: "u3", name: "Julie" },
-];
+// const DUMMY_USERS = [
+//   { id: "u1", name: "Max" },
+//   { id: "u2", name: "Manuel" },
+//   { id: "u3", name: "Julie" },
+// ];
 
 class UserFinder extends Component {
   static contextType = UserCtx;
