@@ -13,24 +13,25 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        "***REMOVED***"
-      );
+      const response = await fetch(process.env.REACT_APP_FIREBASE_URL);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
 
-      const transformedMovies = data.results.map((movieData) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
-        };
-      });
-      setMovies(transformedMovies);
+      const loadedMovies = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseData: data[key].releaseData,
+        });
+      }
+
+      setMovies(loadedMovies);
     } catch (error) {
       setError(error.message);
     }
@@ -42,16 +43,13 @@ function App() {
   }, [fetchMoviesHandler]);
 
   async function addMovieHandler(movie) {
-    const response = await fetch(
-      "***REMOVED***",
-      {
-        method: "POST",
-        body: JSON.stringify(movie),
-        headers: {
-          "Content-Type": "application/json", // describes the type of content sent (not required for firebase)
-        },
-      }
-    );
+    const response = await fetch(process.env.REACT_APP_FIREBASE_URL, {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: {
+        "Content-Type": "application/json", // describes the type of content sent (not required for firebase)
+      },
+    });
     const data = await response.json();
     console.log(data);
   }
