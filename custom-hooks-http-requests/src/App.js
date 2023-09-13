@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Tasks from "./components/Tasks/Tasks";
 import NewTask from "./components/NewTask/NewTask";
@@ -7,7 +7,7 @@ import useHttp from "./hooks/use-http";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const transformTasks = (tasksObj) => {
+  const transformTasks = useCallback((tasksObj) => {
     const loadedTasks = [];
 
     for (const taskKey in tasksObj) {
@@ -15,18 +15,18 @@ function App() {
     }
 
     setTasks(loadedTasks);
-  };
+  }, []); // no external depenencies
 
   // (requestConfig, applyData) // destructuring directly
   const {
     isLoading,
     error,
     sendRequest: fetchTasks, // alias - 'sendRequest recieved, now named 'fetchTasks'
-  } = useHttp({ url: process.env.REACT_APP_FIREBASE_URL }, transformTasks);
+  } = useHttp(transformTasks);
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    fetchTasks({ url: process.env.REACT_APP_FIREBASE_URL });
+  }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
     setTasks((prevTasks) => prevTasks.concat(task));

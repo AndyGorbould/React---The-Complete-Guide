@@ -1,31 +1,34 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-const useHttp = (requestConfig, applyData) => {
+const useHttp = (applyData) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const sendRequest = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : "GET", // IF method is set, else 'GET'
-        headers: requestConfig.headers ? requestConfig.headers : {}, // "" else empty obj
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null, // "" else null
-      });
+  const sendRequest = useCallback(
+    async (requestConfig) => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(requestConfig.url, {
+          method: requestConfig.method ? requestConfig.method : "GET", // IF method is set, else 'GET'
+          headers: requestConfig.headers ? requestConfig.headers : {}, // "" else empty obj
+          body: requestConfig.body ? JSON.stringify(requestConfig.body) : null, // "" else null
+        });
 
-      if (!response.ok) {
-        throw new Error("Request failed!");
+        if (!response.ok) {
+          throw new Error("Request failed!");
+        }
+
+        const data = await response.json();
+
+        applyData(data);
+      } catch (err) {
+        setError(err.message || "Something went wrong!");
       }
-
-      const data = await response.json();
-
-      applyData(data);
-    } catch (err) {
-      setError(err.message || "Something went wrong!");
-    }
-    setIsLoading(false);
-  };
+      setIsLoading(false);
+    },
+    [applyData]
+  );
 
   return {
     isLoading,
