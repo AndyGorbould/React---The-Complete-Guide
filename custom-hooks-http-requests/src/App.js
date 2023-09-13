@@ -18,35 +18,11 @@ function App() {
   };
 
   // (requestConfig, applyData) // destructuring directly
-  const { isLoading, error, sendRequest } = useHttp(
-    { url: process.env.REACT_APP_FIREBASE_URL },
-    transformTasks
-  );
-
-  const fetchTasks = async (taskText) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(process.env.REACT_APP_FIREBASE_URL);
-
-      if (!response.ok) {
-        throw new Error("Request failed!");
-      }
-
-      const data = await response.json();
-
-      const loadedTasks = [];
-
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
-
-      setTasks(loadedTasks);
-    } catch (err) {
-      setError(err.message || "Something went wrong!");
-    }
-    setIsLoading(false);
-  };
+  const {
+    isLoading,
+    error,
+    sendRequest: fetchTasks, // alias - 'sendRequest recieved, now named 'fetchTasks'
+  } = useHttp({ url: process.env.REACT_APP_FIREBASE_URL }, transformTasks);
 
   useEffect(() => {
     fetchTasks();
