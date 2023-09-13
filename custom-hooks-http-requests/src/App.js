@@ -17,7 +17,11 @@ function App() {
     setTasks(loadedTasks);
   };
 
-  useHttp({ url: process.env.REACT_APP_FIREBASE_URL }, transformTasks); // (requestConfig, applyData)
+  // (requestConfig, applyData) // destructuring directly
+  const { isLoading, error, sendRequest } = useHttp(
+    { url: process.env.REACT_APP_FIREBASE_URL },
+    transformTasks
+  );
 
   const fetchTasks = async (taskText) => {
     setIsLoading(true);
