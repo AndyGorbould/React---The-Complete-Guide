@@ -6,8 +6,18 @@ import useHttp from "./hooks/use-http";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  useHttp({url: process.env.REACT_APP_FIREBASE_URL})
 
+  const transformTasks = (tasksObj) => {
+    const loadedTasks = [];
+
+    for (const taskKey in tasksObj) {
+      loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
+    }
+
+    setTasks(loadedTasks);
+  };
+
+  useHttp({ url: process.env.REACT_APP_FIREBASE_URL }, transformTasks); // (requestConfig, applyData)
 
   const fetchTasks = async (taskText) => {
     setIsLoading(true);
