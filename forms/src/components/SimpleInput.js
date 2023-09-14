@@ -7,8 +7,14 @@ const SimpleInput = (props) => {
     setEnteredName(event.target.value);
   };
 
+  const formSubmissionHandler = (event) => {
+    event.preventDefault(); // stop page reloading
+
+    console.log(enteredName);
+  };
+
   return (
-    <form>
+    <form onSubmit={formSubmissionHandler}>
       <div className="form-control">
         <label htmlFor="name">Your Name</label>
         <input type="text" id="name" onChange={nameInputChangeHandler} />
